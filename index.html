@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="نظام سحابي فخم للمصورين ووكالات الدعاية: حجوزات، مالية، فواتير، تذكيرات واتساب، وإدارة فريق."/>
+  <title>نظام المصورين السحابي | Professional Photography Management</title>
+
+  <!-- Google Fonts - خطوط عصرية -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <!-- AOS (Scroll Animations ) -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-light: #3b82f6;
+      --accent: #f59e0b;
+      --accent-light: #fbbf24;
+      --success: #10b981;
+      --danger: #ef4444;
+      --bg-dark: #0f172a;
+      --bg-darker: #020617;
+      --card-bg: #1e293b;
+      --card-light: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --border-color: rgba(148, 163, 184, 0.15 );
+      --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.2);
+      --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.3);
+      --shadow-xl: 0 30px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Tajawal', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animated background elements */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(30, 64, 175, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(245, 158, 11, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ==================== NAVIGATION ==================== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      animation: slideDown 0.6s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--primary-light), var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    .logo i {
+      font-size: 1.8rem;
+      color: var(--accent-light);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      right: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-light), var(--accent-light));
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
+      color: white;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border: 2px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary-light);
+      color: var(--primary-light);
+      background: rgba(59, 130, 246, 0.05);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* ==================== HERO SECTION ==================== */
+    .hero {
+      padding: 100px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-text h1 .highlight {
+      background: linear-gradient(135deg, var(--primary-light), var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-text p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+      line-height: 1.8;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      animation: fadeInUp 0.8s ease-out 0.6s both;
+    }
+
+    .hero-image {
+      position: relative;
+      animation: fadeInRight 0.8s ease-out 0.3s both;
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: var(--shadow-xl);
+      border: 1px solid var(--border-color);
+    }
+
+    /* ==================== FEATURES SECTION ==================== */
+    .features {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+
+    .section-header p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(51, 65, 85, 0.5));
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 40px 30px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(245, 158, 11, 0.05));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--primary-light);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: white;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    }
+
+    .feature-card h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    /* ==================== STATS SECTION ==================== */
+    .stats {
+      padding: 80px 0;
+      background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(245, 158, 11, 0.05));
+      border-radius: 20px;
+      margin: 60px 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      text-align: center;
+    }
+
+    .stat-item h3 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--primary-light), var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+
+    .stat-item p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    /* ==================== GALLERY SECTION ==================== */
+    .gallery {
+      padding: 100px 0;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      cursor: pointer;
+      group: 'gallery';
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-overlay i {
+      font-size: 2rem;
+      color: white;
+    }
+
+    /* ==================== TESTIMONIALS SECTION ==================== */
+    .testimonials {
+      padding: 100px 0;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .testimonial-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(51, 65, 85, 0.5));
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+      border-color: var(--primary-light);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .testimonial-stars {
+      color: var(--accent-light);
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+    }
+
+    .testimonial-text {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author-avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary-light), var(--accent-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+
+    .author-info h4 {
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .author-info p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* ==================== CTA SECTION ==================== */
+    .cta {
+      padding: 80px 0;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(30, 64, 175, 0.15), rgba(245, 158, 11, 0.1));
+      border-radius: 20px;
+      margin: 60px 0;
+    }
+
+    .cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+    }
+
+    .cta p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ==================== FOOTER ==================== */
+    .footer {
+      background: rgba(15, 23, 42, 0.8);
+      border-top: 1px solid var(--border-color);
+      padding: 60px 0 20px;
+      margin-top: 100px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-section h3 {
+      font-weight: 800;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+    }
+
+    .footer-section a {
+      display: block;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: var(--primary-light);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(59, 130, 246, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-light);
+      transition: all 0.3s ease;
+      margin-bottom: 0;
+    }
+
+    .social-links a:hover {
+      background: var(--primary-light);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border-color);
+      padding-top: 20px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    /* ==================== RESPONSIVE ==================== */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .hero-text h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .section-header h2 {
+        font-size: 2rem;
+      }
+
+      .cta h2 {
+        font-size: 2rem;
+      }
+    }
+
+    /* ==================== ANIMATIONS ==================== */
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    @keyframes glow {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 40px rgba(59, 130, 246, 0.5);
+      }
+    }
+
+    .float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .glow {
+      animation: glow 2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-content">
+        <div class="logo">
+          <i class="fas fa-camera"></i>
+          <span>ProStudio</span>
+        </div>
+        <div class="nav-links">
+          <a href="#features">المميزات</a>
+          <a href="#gallery">أعمالنا</a>
+          <a href="#testimonials">آراء العملاء</a>
+        </div>
+        <div class="nav-actions">
+          <button class="btn btn-secondary">تسجيل الدخول</button>
+          <button class="btn btn-primary">ابدأ الآن</button>
+          <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>نظام إدارة <span class="highlight">احترافي</span> للمصورين</h1>
+          <p>منصة سحابية متكاملة تجمع بين الحجوزات والمالية والفواتير والتذكيرات الذكية وإدارة الفريق، كل ما تحتاجه لتطوير عملك في مكان واحد.</p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary">جرب مجاناً</button>
+            <button class="btn btn-secondary">شاهد العرض التوضيحي</button>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="images/dashboard.png" alt="لوحة التحكم الرئيسية" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FEATURES SECTION ==================== -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header">
+        <h2>المميزات الرئيسية</h2>
+        <p>كل ما تحتاجه لإدارة عملك بكفاءة واحترافية</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card" data-aos="fade-up">
+          <div class="feature-icon">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <h3>نظام الحجوزات الذكي</h3>
+          <p>إدارة سهلة وسريعة للحجوزات مع تذكيرات تلقائية عبر واتساب والبريد الإلكتروني.</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="feature-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3>إدارة مالية متقدمة</h3>
+          <p>تتبع دقيق للإيرادات والمصروفات مع تقارير شاملة وتحليلات مفصلة.</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="feature-icon">
+            <i class="fas fa-receipt"></i>
+          </div>
+          <h3>فواتير احترافية</h3>
+          <p>إنشاء وإرسال فواتير احترافية بسهولة مع خيارات دفع متعددة.</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="feature-icon">
+            <i class="fas fa-bell"></i>
+          </div>
+          <h3>تذكيرات ذكية</h3>
+          <p>تذكيرات تلقائية عبر واتساب والبريد الإلكتروني للعملاء والفريق.</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="feature-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>إدارة الفريق</h3>
+          <p>تنظيم الفريق وتوزيع المهام وتتبع الأداء بكفاءة عالية.</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="feature-icon">
+            <i class="fas fa-cloud"></i>
+          </div>
+          <h3>نظام سحابي آمن</h3>
+          <p>بيانات آمنة وموثوقة مع نسخ احتياطية تلقائية وحماية عالية.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== STATS SECTION ==================== -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item" data-aos="fade-up">
+          <h3>5000+</h3>
+          <p>مصور نشط</p>
+        </div>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+          <h3>50000+</h3>
+          <p>حجز شهري</p>
+        </div>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+          <h3>99.9%</h3>
+          <p>توفر الخدمة</p>
+        </div>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+          <h3>24/7</h3>
+          <p>دعم فني</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== GALLERY SECTION ==================== -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <div class="section-header">
+        <h2>أعمالنا</h2>
+        <p>عينة من الأعمال الاحترافية لعملائنا</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item" data-aos="fade-up">
+          <img src="images/dashboard.png" alt="لوحة التحكم" />
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+        <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+          <img src="images/calendar.png" alt="التقويم والحجوزات" />
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+        <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+          <img src="images/finance.png" alt="المالية والتقارير" />
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+        <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+          <img src="images/team.png" alt="إدارة الفريق" />
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TESTIMONIALS SECTION ==================== -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <h2>آراء عملائنا</h2>
+        <p>ما يقوله المصورون والوكالات عن خدماتنا</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card" data-aos="fade-up">
+          <div class="testimonial-stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"نظام رائع جداً، ساعدني على تنظيم عملي بشكل احترافي وزيادة إنتاجيتي بنسبة كبيرة."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">أ</div>
+            <div class="author-info">
+              <h4>أحمد محمد</h4>
+              <p>مصور محترف</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="testimonial-stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"أفضل استثمار قمت به لعملي، الدعم الفني ممتاز والنظام سهل الاستخدام جداً."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">ف</div>
+            <div class="author-info">
+              <h4>فاطمة علي</h4>
+              <p>مديرة وكالة دعاية</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="testimonial-stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"تغير كامل في طريقة عملي، الآن أستطيع إدارة عملي بكفاءة أعلى وبوقت أقل."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">س</div>
+            <div class="author-info">
+              <h4>سارة خالد</h4>
+              <p>صاحبة استوديو تصوير</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA SECTION ==================== -->
+  <section class="cta">
+    <div class="container">
+      <h2>هل أنت مستعد لتطوير عملك؟</h2>
+      <p>انضم إلى آلاف المصورين والوكالات الذين يثقون بنا</p>
+      <button class="btn btn-primary">ابدأ الآن مجاناً</button>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>عن ProStudio</h3>
+          <p>منصة سحابية متكاملة لإدارة أعمال التصوير بكفاءة واحترافية.</p>
+          <div class="social-links">
+            <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3>المنتج</h3>
+          <a href="#features">المميزات</a>
+          <a href="#gallery">الأعمال</a>
+          <a href="#">الأمان</a>
+        </div>
+        <div class="footer-section">
+          <h3>الشركة</h3>
+          <a href="#">من نحن</a>
+          <a href="#">المدونة</a>
+          <a href="#">الوظائف</a>
+          <a href="#">اتصل بنا</a>
+        </div>
+        <div class="footer-section">
+          <h3>القانونية</h3>
+          <a href="#">سياسة الخصوصية</a>
+          <a href="#">شروط الخدمة</a>
+          <a href="#">سياسة الاستخدام</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 ProStudio. جميع الحقوق محفوظة.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AOS Script -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out-cubic',
+      once: true,
+      offset: 100
+    } );
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    mobileMenuBtn?.addEventListener('click', () => {
+      navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // Add scroll animation to navbar
+    let lastScroll = 0;
+    const navbar = document.querySelector('.navbar');
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll <= 0) {
+        navbar.style.background = 'rgba(15, 23, 42, 0.8)';
+      } else if (currentScroll > lastScroll) {
+        navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+      } else {
+        navbar.style.background = 'rgba(15, 23, 42, 0.8)';
+      }
+      
+      lastScroll = currentScroll;
+    });
+
+    // Button ripple effect
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+      });
+    });
+
+    // Counter animation for stats
+    const observerOptions = {
+      threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+          const h3 = entry.target.querySelector('h3');
+          const finalValue = h3.textContent;
+          const numericValue = parseInt(finalValue);
+          
+          if (!isNaN(numericValue)) {
+            let currentValue = 0;
+            const increment = numericValue / 50;
+            
+            const counter = setInterval(() => {
+              currentValue += increment;
+              if (currentValue >= numericValue) {
+                h3.textContent = finalValue;
+                clearInterval(counter);
+              } else {
+                h3.textContent = Math.floor(currentValue).toLocaleString('ar-SA') + (finalValue.includes('+') ? '+' : '');
+              }
+            }, 30);
+          }
+          
+          entry.target.classList.add('counted');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.stat-item').forEach(item => {
+      observer.observe(item);
+    });
+  </script>
+
+</body>
+</html>
