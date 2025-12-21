@@ -1,938 +1,183 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>إدارة بلس - نظام إدارة العمليات الشامل للوكالات والمصورين</title>
-  
-  <!-- Bootstrap 5 RTL -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
-  
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  
-  <!-- Google Fonts - Tajawal (خط عربي عصري) -->
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-  
-  <!-- AOS - Animate On Scroll (للحركات الجميلة عند التمرير) -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-  
-  <style>
-    :root {
-      --primary: #014979;
-      --primary-dark: #01345c;
-      --primary-light: #026aa7;
-      --gold: #b19738;
-      --gold-light: #d4af37;
-      --bg-main: #f5f7fb;
-      --card-bg: #ffffff;
-      --text-main: #0f172a;
-      --text-muted: #6b7280;
-      --border-soft: rgba(15, 23, 42, 0.08);
-      --success: #059669;
-      --danger: #dc2626;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Tajawal', sans-serif;
-      background: var(--bg-main);
-      color: var(--text-main);
-      line-height: 1.6;
-    }
-
-    /* ==================== NAVBAR ==================== */
-    .navbar-custom {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-      box-shadow: 0 8px 24px rgba(1, 73, 121, 0.2);
-      padding: 1rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .navbar-brand {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #fff !important;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .navbar-brand i {
-      font-size: 1.8rem;
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .nav-link {
-      color: rgba(255, 255, 255, 0.85) !important;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      margin: 0 0.5rem;
-    }
-
-    .nav-link:hover {
-      color: var(--gold) !important;
-      transform: translateY(-2px);
-    }
-
-    /* ==================== HERO SECTION ==================== */
-    .hero {
-      background: linear-gradient(135deg, #00243f 0%, var(--primary) 50%, var(--primary-light) 100%);
-      color: #fff;
-      padding: 6rem 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      right: -10%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.15), transparent 70%);
-      border-radius: 50%;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      bottom: -30%;
-      left: -5%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent 70%);
-      border-radius: 50%;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      line-height: 1.2;
-      animation: slideInDown 0.8s ease;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-      color: rgba(255, 255, 255, 0.9);
-      animation: slideInUp 0.8s ease 0.2s both;
-    }
-
-    .hero-image {
-      position: relative;
-      z-index: 2;
-      animation: slideInRight 0.8s ease 0.4s both;
-    }
-
-    .hero-image img {
-      width: 100%;
-      border-radius: 1.5rem;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-    }
-
-    .btn-hero {
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
-      color: var(--primary) !important;
-      border: none;
-      padding: 1rem 2.5rem;
-      font-size: 1.1rem;
-      font-weight: 700;
-      border-radius: 999px;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      animation: slideInUp 0.8s ease 0.3s both;
-    }
-
-    .btn-hero:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
-    }
-
-    @keyframes slideInDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes slideInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes slideInRight {
-      from { opacity: 0; transform: translateX(30px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    /* ==================== SECTION STYLING ==================== */
-    section {
-      padding: 5rem 0;
-    }
-
-    .section-title {
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      color: var(--primary);
-      text-align: center;
-    }
-
-    .section-subtitle {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      text-align: center;
-      margin-bottom: 3rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* ==================== PROBLEM SECTION ==================== */
-    .problem-section {
-      background: var(--bg-main);
-    }
-
-    .problem-card {
-      background: var(--card-bg);
-      border-radius: 1.25rem;
-      padding: 2rem;
-      border: 1px solid var(--border-soft);
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
-      transition: all 0.3s ease;
-      margin-bottom: 1.5rem;
-    }
-
-    .problem-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
-      border-color: var(--gold);
-    }
-
-    .problem-icon {
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(135deg, var(--danger), #ff6b6b);
-      border-radius: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-    }
-
-    .problem-card h4 {
-      color: var(--primary);
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .problem-card p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-
-    /* ==================== FEATURES SECTION ==================== */
-    .features-section {
-      background: #fff;
-    }
-
-    .feature-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(243, 244, 246, 0.5));
-      border-radius: 1.5rem;
-      padding: 2.5rem;
-      border: 1px solid var(--border-soft);
-      box-shadow: 0 15px 35px rgba(15, 23, 42, 0.06);
-      transition: all 0.4s ease;
-      position: relative;
-      overflow: hidden;
-      height: 100%;
-    }
-
-    .feature-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--gold), var(--primary-light));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 25px 60px rgba(15, 23, 42, 0.15);
-    }
-
-    .feature-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .feature-icon {
-      width: 80px;
-      height: 80px;
-      background: linear-gradient(135deg, var(--primary-light), var(--gold));
-      border-radius: 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 2.2rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 10px 30px rgba(1, 73, 121, 0.2);
-    }
-
-    .feature-card h3 {
-      color: var(--primary);
-      font-weight: 700;
-      margin-bottom: 1rem;
-      font-size: 1.3rem;
-    }
-
-    .feature-card p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.7;
-    }
-
-    .feature-image {
-      width: 100%;
-      border-radius: 1rem;
-      margin-top: 1.5rem;
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1);
-    }
-
-    /* ==================== BENEFITS SECTION ==================== */
-    .benefits-section {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .benefits-section::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      right: -10%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 70%);
-      border-radius: 50%;
-    }
-
-    .benefits-section .section-title,
-    .benefits-section .section-subtitle {
-      color: #fff;
-    }
-
-    .benefit-item {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 1.25rem;
-      padding: 2rem;
-      margin-bottom: 1.5rem;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-      position: relative;
-      z-index: 2;
-    }
-
-    .benefit-item:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transform: translateX(-8px);
-    }
-
-    .benefit-item h4 {
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      color: var(--gold);
-    }
-
-    .benefit-item p {
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 0.95rem;
-    }
-
-    /* ==================== CTA SECTION ==================== */
-    .cta-section {
-      background: var(--bg-main);
-      text-align: center;
-    }
-
-    .cta-box {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-      color: #fff;
-      border-radius: 2rem;
-      padding: 4rem 2rem;
-      box-shadow: 0 20px 60px rgba(1, 73, 121, 0.3);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-box::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      right: -10%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.2), transparent 70%);
-      border-radius: 50%;
-    }
-
-    .cta-box h2 {
-      font-size: 2rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    .cta-box p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-      color: rgba(255, 255, 255, 0.9);
-      position: relative;
-      z-index: 2;
-    }
-
-    .whatsapp-button {
-      background: #25D366;
-      color: #fff !important;
-      border: none;
-      padding: 1rem 2.5rem;
-      font-size: 1.1rem;
-      font-weight: 700;
-      border-radius: 999px;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.7rem;
-      position: relative;
-      z-index: 2;
-      text-decoration: none;
-    }
-
-    .whatsapp-button:hover {
-      background: #1ea952;
-      transform: translateY(-4px);
-      box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4);
-      color: #fff !important;
-    }
-
-    /* ==================== CONTACT INFO TABLE ==================== */
-    .contact-info {
-      background: var(--card-bg);
-      border-radius: 1.25rem;
-      padding: 2rem;
-      margin-top: 2rem;
-      border: 1px solid var(--border-soft);
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
-    }
-
-    .contact-info h4 {
-      color: var(--primary);
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      text-align: center;
-    }
-
-    .contact-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .contact-table tr {
-      border-bottom: 1px solid var(--border-soft);
-    }
-
-    .contact-table tr:last-child {
-      border-bottom: none;
-    }
-
-    .contact-table td {
-      padding: 1rem;
-      text-align: center;
-    }
-
-    .contact-table .label {
-      font-weight: 700;
-      color: var(--primary);
-      width: 30%;
-    }
-
-    .contact-table .value {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      word-break: break-all;
-    }
-
-    .copy-btn {
-      background: var(--gold);
-      color: var(--primary) !important;
-      border: none;
-      padding: 0.4rem 0.8rem;
-      border-radius: 0.5rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-right: 0.5rem;
-    }
-
-    .copy-btn:hover {
-      background: var(--gold-light);
-      transform: scale(1.05);
-    }
-
-    /* ==================== FLOATING WHATSAPP BUTTON ==================== */
-    .floating-whatsapp {
-      position: fixed;
-      bottom: 2rem;
-      left: 2rem;
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(135deg, #25D366, #1ea952);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 1.8rem;
-      box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
-      transition: all 0.3s ease;
-      z-index: 999;
-      animation: bounceInUp 0.6s ease, pulse 2s ease-in-out infinite 0.6s;
-      text-decoration: none;
-    }
-
-    .floating-whatsapp:hover {
-      transform: scale(1.15);
-      box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
-      animation: none;
-    }
-
-    @keyframes bounceInUp {
-      from {
-        opacity: 0;
-        transform: translateY(50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
-      }
-      50% {
-        transform: scale(1.1);
-        box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
-      }
-    }
-
-    /* ==================== FOOTER ==================== */
-    footer {
-      background: var(--primary);
-      color: #fff;
-      padding: 3rem 0 1rem;
-      text-align: center;
-    }
-
-    .footer-content {
-      margin-bottom: 2rem;
-    }
-
-    .footer-content h5 {
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: var(--gold);
-    }
-
-    .footer-content p {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 0.95rem;
-    }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-top: 1.5rem;
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.9rem;
-    }
-
-    /* ==================== RESPONSIVE ==================== */
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .hero p {
-        font-size: 1rem;
-      }
-
-      .section-title {
-        font-size: 1.8rem;
-      }
-
-      .btn-hero {
-        padding: 0.8rem 1.8rem;
-        font-size: 0.95rem;
-      }
-
-      .cta-box {
-        padding: 2rem 1rem;
-      }
-
-      .cta-box h2 {
-        font-size: 1.5rem;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- ==================== NAVBAR ==================== -->
-  <nav class="navbar navbar-expand-lg navbar-custom">
-    <div class="container-lg">
-      <a class="navbar-brand" href="#home">
-        <i class="fas fa-chart-line"></i>
-        إدارة بلس
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#features">الميزات</a></li>
-          <li class="nav-item"><a class="nav-link" href="#benefits">لماذا إدارة بلس؟</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">التواصل</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- ==================== HERO SECTION ==================== -->
-  <section class="hero" id="home">
-    <div class="container-lg">
-      <div class="row align-items-center g-5">
-        <div class="col-lg-6 hero-content">
-          <h1>وداعاً للفوضى الإدارية.<br>مرحباً بالنمو المالي الواضح.</h1>
-          <p>إدارة بلس (إدارة+) هو نظام إدارة العمليات الشامل والمصمم خصيصاً لوكالات ومصوري المحتوى المرئي. حوّل إبداعك إلى عمل تجاري منظم ومربح.</p>
-          <a href="#contact" class="btn-hero">
-            <i class="fas fa-arrow-left"></i>
-            اكتشف قوة إدارة بلس
-          </a>
-        </div>
-        <div class="col-lg-6 hero-image">
-          <!-- هنا تضع صورة لوحة التحكم الرئيسية (Dashboard) -->
-          <div style="background: linear-gradient(135deg, var(--primary-light), var(--gold)); border-radius: 1.5rem; padding: 3rem; text-align: center; color: #fff; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);">
-            <i class="fas fa-image" style="font-size: 4rem; opacity: 0.5;"></i>
-            <p style="margin-top: 1rem; font-size: 1rem;">ضع صورة لوحة التحكم هنا</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== PROBLEM SECTION ==================== -->
-  <section class="problem-section">
-    <div class="container-lg">
-      <h2 class="section-title">المشكلة التي نحلها</h2>
-      <p class="section-subtitle">يعاني المحترفون في مجال التصوير والإنتاج الإعلامي من تشتت جهودهم بين الإبداع ومتطلبات الإدارة المعقدة.</p>
-      
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-4" data-aos="fade-up">
-          <div class="problem-card">
-            <div class="problem-icon">
-              <i class="fas fa-files"></i>
-            </div>
-            <h4>تشتت البيانات</h4>
-            <p>الحجوزات في تقويم، المهام في قائمة، والمصروفات في جدول بيانات منفصل.</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-          <div class="problem-card">
-            <div class="problem-icon">
-              <i class="fas fa-chart-pie"></i>
-            </div>
-            <h4>غموض الأداء المالي</h4>
-            <p>صعوبة تحديد صافي الربح الحقيقي والمستحقات المعلقة بسهولة.</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-          <div class="problem-card">
-            <div class="problem-icon">
-              <i class="fas fa-users"></i>
-            </div>
-            <h4>ضعف التنسيق</h4>
-            <p>تحديات في توزيع المهام وتتبع تقدم الفريق والعملاء.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== FEATURES SECTION ==================== -->
-  <section class="features-section" id="features">
-    <div class="container-lg">
-      <h2 class="section-title">الميزات الأساسية</h2>
-      <p class="section-subtitle">نظام إدارة بلس مبني على أربعة أركان أساسية تضمن لك إدارة متكاملة وفعالة.</p>
-      
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-6" data-aos="fade-up">
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-gauge"></i>
-            </div>
-            <h3>لوحة التحكم الذكية</h3>
-            <p>ملخص مالي وتشغيلي فوري يمنحك السيطرة الكاملة. اتخاذ قرارات سريعة ومبنية على بيانات دقيقة (إجمالي الإيرادات، صافي الربح، المستحقات).</p>
-            <!-- هنا تضع صورة لوحة التحكم -->
-            <div style="background: linear-gradient(135deg, #e3f2ff, #f0f9ff); border-radius: 1rem; padding: 2rem; text-align: center; margin-top: 1.5rem; color: var(--primary);">
-              <i class="fas fa-image" style="font-size: 2.5rem; opacity: 0.5;"></i>
-              <p style="margin-top: 0.5rem; font-size: 0.9rem;">صورة لوحة التحكم</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="100">
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-calendar-alt"></i>
-            </div>
-            <h3>إدارة الحجوزات والتقويم</h3>
-            <p>تنظيم المواعيد والجدولة الاحترافية. استخدام تقويم متكامل لتجنب تداخل المواعيد وضمان التزام الفريق بمواعيد العملاء.</p>
-            <!-- هنا تضع صورة التقويم -->
-            <div style="background: linear-gradient(135deg, #e3f2ff, #f0f9ff); border-radius: 1rem; padding: 2rem; text-align: center; margin-top: 1.5rem; color: var(--primary);">
-              <i class="fas fa-image" style="font-size: 2.5rem; opacity: 0.5;"></i>
-              <p style="margin-top: 0.5rem; font-size: 0.9rem;">صورة التقويم والحجوزات</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="200">
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-tasks"></i>
-            </div>
-            <h3>تتبع المهام والمشاريع</h3>
-            <p>توزيع الأعمال ومتابعة الإنجاز. إسناد المهام للمصورين والمحررين وتتبع حالة كل مشروع من البداية حتى التسليم.</p>
-            <!-- هنا تضع صورة المهام -->
-            <div style="background: linear-gradient(135deg, #e3f2ff, #f0f9ff); border-radius: 1rem; padding: 2rem; text-align: center; margin-top: 1.5rem; color: var(--primary);">
-              <i class="fas fa-image" style="font-size: 2.5rem; opacity: 0.5;"></i>
-              <p style="margin-top: 0.5rem; font-size: 0.9rem;">صورة المهام والمشاريع</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="300">
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-chart-line"></i>
-            </div>
-            <h3>التحليل المالي والمصروفات</h3>
-            <p>شفافية مالية غير مسبوقة. تتبع المصروفات بدقة، ومقارنة الأداء بالمستهدفات الشهرية، وحساب صافي الربح تلقائياً.</p>
-            <!-- هنا تضع صورة المالية -->
-            <div style="background: linear-gradient(135deg, #e3f2ff, #f0f9ff); border-radius: 1rem; padding: 2rem; text-align: center; margin-top: 1.5rem; color: var(--primary);">
-              <i class="fas fa-image" style="font-size: 2.5rem; opacity: 0.5;"></i>
-              <p style="margin-top: 0.5rem; font-size: 0.9rem;">صورة التحليل المالي</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="400">
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-sync-alt"></i>
-            </div>
-            <h3>مزامنة التقويم الذكية</h3>
-            <p>ترابط كامل مع تقويم Apple و Google Calendar. حافظ على جميع حجوزاتك متزامنة عبر جميع أجهزتك وتطبيقاتك بسهولة.</p>
-            <!-- هنا تضع صورة المزامنة -->
-            <div style="background: linear-gradient(135deg, #e3f2ff, #f0f9ff); border-radius: 1rem; padding: 2rem; text-align: center; margin-top: 1.5rem; color: var(--primary);">
-              <i class="fas fa-image" style="font-size: 2.5rem; opacity: 0.5;"></i>
-              <p style="margin-top: 0.5rem; font-size: 0.9rem;">صورة المزامنة</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="500">
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-user-shield"></i>
-            </div>
-            <h3>صلاحيات مخصصة للفريق</h3>
-            <p>تحكم دقيق في صلاحيات كل عضو بالفريق. حدد من يمكنه الوصول إلى الحجوزات والمشاريع والبيانات المالية حسب احتياجات عملك.</p>
-            <!-- هنا تضع صورة الصلاحيات -->
-            <div style="background: linear-gradient(135deg, #e3f2ff, #f0f9ff); border-radius: 1rem; padding: 2rem; text-align: center; margin-top: 1.5rem; color: var(--primary);">
-              <i class="fas fa-image" style="font-size: 2.5rem; opacity: 0.5;"></i>
-              <p style="margin-top: 0.5rem; font-size: 0.9rem;">صورة الصلاحيات</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== BENEFITS SECTION ==================== -->
-  <section class="benefits-section" id="benefits">
-    <div class="container-lg">
-      <h2 class="section-title">لماذا تختار إدارة بلس؟</h2>
-      <p class="section-subtitle">نظام متكامل يجمع بين الكفاءة والابتكار والموثوقية.</p>
-      
-      <div class="row g-4">
-        <div class="col-md-6" data-aos="fade-right">
-          <div class="benefit-item">
-            <h4><i class="fas fa-rocket"></i> التركيز على الأداء والنمو</h4>
-            <p>نظامنا لا يكتفي بالتنظيم، بل يركز على قياس الأداء المالي عبر تتبع المستهدفات الشهرية ونسبة الإنجاز، مما يحفز فريقك على تحقيق المزيد.</p>
-          </div>
-        </div>
-
-        <div class="col-md-6" data-aos="fade-left">
-          <div class="benefit-item">
-            <h4><i class="fas fa-paint-brush"></i> واجهة مستخدم أنيقة وعصرية</h4>
-            <p>تصميم النظام يراعي أعلى معايير الجمالية وسهولة الاستخدام، مما يقلل من منحنى التعلم ويزيد من إنتاجية فريقك.</p>
-          </div>
-        </div>
-
-        <div class="col-md-6" data-aos="fade-right" data-aos-delay="100">
-          <div class="benefit-item">
-            <h4><i class="fas fa-shield-alt"></i> مطورون موثوقون (Codef)</h4>
-            <p>تم تطوير النظام بالكامل بواسطة Codef، مطور برمجيات وتطبيقات الويب المرخص، مما يضمن لك جودة الكود والدعم الفني المستمر.</p>
-          </div>
-        </div>
-
-        <div class="col-md-6" data-aos="fade-left" data-aos-delay="100">
-          <div class="benefit-item">
-            <h4><i class="fas fa-check-circle"></i> رمز الترخيص: FL-441060219</h4>
-            <p>ضمان الجودة والموثوقية من خلال الترخيص الرسمي، مع التطوير المستقبلي والدعم الفني المتواصل.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== CTA SECTION ==================== -->
-  <section class="cta-section" id="contact">
-    <div class="container-lg">
-      <div class="cta-box">
-        <h2>شاهد النظام وهو يعمل</h2>
-        <p>لا تكتفِ بالقراءة. نحن على ثقة بأن "إدارة بلس" سيغير طريقة عملك للأفضل.</p>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة بلس+ | النظام المتكامل للوكالات والمصورين</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <style>
+        body { font-family: 'Tajawal', sans-serif; scroll-behavior: smooth; }
+        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        .text-primary { color: #014979; }
+        .bg-primary { background-color: #014979; }
+        .bg-gold { background-color: #b19738; }
+        .border-gold { border-color: #b19738; }
+        .hover-gold:hover { background-color: #947d2d; }
         
-        <a href="https://wa.me/966628488888?text=السلام%20عليكم%20أود%20التعرف%20أكثر%20على%20إدارة%20بلس" target="_blank" class="whatsapp-button">
-          <i class="fab fa-whatsapp"></i>
-          تواصل عبر الواتساب
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== FLOATING WHATSAPP BUTTON ==================== -->
-  <a href="https://wa.me/966628488888?text=السلام%20عليكم%20أود%20التعرف%20أكثر%20على%20إدارة%20بلس" target="_blank" class="floating-whatsapp">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-
-  <!-- ==================== FOOTER ==================== -->
-  <footer>
-    <div class="container-lg">
-      <div class="row g-4 mb-4">
-        <div class="col-md-4">
-          <div class="footer-content">
-            <h5><i class="fas fa-chart-line"></i> إدارة بلس</h5>
-            <p>نظام إدارة العمليات الشامل لوكالات ومصوري المحتوى المرئي.</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="footer-content">
-            <h5><i class="fas fa-code"></i> المطور</h5>
-            <p>Codef - مطور برمجيات وتطبيقات الويب المرخص<br>رمز الترخيص: FL-441060219</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="footer-content">
-            <h5><i class="fas fa-phone"></i> التواصل</h5>
-            <p>واتساب: 05628488888<br>جاهزون لخدمتك 24/7</p>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 إدارة بلس. جميع الحقوق محفوظة. تم التطوير بواسطة <strong>Codef</strong></p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  
-  <!-- AOS JS - Animate On Scroll -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-
-  <script>
-    // تهيئة AOS (الحركات عند التمرير)
-    AOS.init({
-      duration: 800,
-      easing: 'ease-in-out',
-      once: true,
-    });
-
-    // دالة نسخ النص إلى الحافظة
-    function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        alert('تم نسخ النص بنجاح! ✓');
-      }).catch(err => {
-        console.error('فشل النسخ:', err);
-      });
-    }
-
-    // تأثير التمرير السلس (Smooth Scroll)
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+        /* تأثير تدرج الخلفية */
+        .hero-gradient {
+            background: linear-gradient(135deg, #00243f 0%, #014979 100%);
         }
-      });
-    });
+    </style>
+</head>
+<body class="bg-gray-50">
 
-    // تأثير تغيير لون الـ Navbar عند التمرير
-    window.addEventListener('scroll', () => {
-      const navbar = document.querySelector('.navbar-custom');
-      if (window.scrollY > 50) {
-        navbar.style.boxShadow = '0 12px 30px rgba(1, 73, 121, 0.3)';
-      } else {
-        navbar.style.boxShadow = '0 8px 24px rgba(1, 73, 121, 0.2)';
-      }
-    });
-  </script>
+    <nav class="fixed w-full z-50 glass border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white text-2xl">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <span class="text-2xl font-black text-primary tracking-tighter">إدارة بلس</span>
+                </div>
+                <div class="hidden md:flex space-x-reverse space-x-8 font-medium">
+                    <a href="#features" class="hover:text-gold transition">المميزات</a>
+                    <a href="#workflow" class="hover:text-gold transition">آلية العمل</a>
+                    <a href="#about" class="hover:text-gold transition">عن المطور</a>
+                </div>
+                <a href="https://wa.me/9665628488888?text=السلام%20عليكم%20أود%20التعرف%20أكثر%20على%20إدارة%20بلس" 
+                   class="bg-gold text-white px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition shadow-lg">
+                    اطلب الآن
+                </a>
+            </div>
+        </div>
+    </nav>
 
+    <section class="hero-gradient pt-32 pb-20 px-4">
+        <div class="max-w-7xl mx-auto text-center text-white">
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight" data-aos="fade-up">
+                حوّل إدارة وكالتك من <span class="text-yellow-500">مجهود شاق</span> <br>إلى نقرات بسيطة
+            </h1>
+            <p class="text-xl opacity-80 mb-10 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                النظام المتكامل لإدارة الحجوزات، المشاريع، والمالية المصمم خصيصاً للوكالات الإبداعية والمصورين المحترفين.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
+                <a href="https://wa.me/9665628488888" class="bg-white text-primary px-10 py-4 rounded-xl font-extrabold text-lg hover:shadow-2xl transition">
+                    ابدأ تجربتك الآن
+                </a>
+                <a href="#features" class="border border-white border-opacity-30 px-10 py-4 rounded-xl font-bold text-lg hover:bg-white hover:text-primary transition">
+                    استكشف المميزات
+                </a>
+            </div>
+            <div class="mt-16 relative mx-auto max-w-5xl" data-aos="zoom-in" data-aos-delay="300">
+                <div class="bg-white p-2 rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
+                    <img src="https://via.placeholder.com/1200x600/f8fafc/014979?text=Idara+Plus+Dashboard+UI" alt="لوحة التحكم" class="rounded-xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div data-aos="fade-up">
+                <div class="text-3xl font-black text-primary mb-1">100%</div>
+                <div class="text-gray-500 text-sm italic">أتمتة العمليات</div>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="100">
+                <div class="text-3xl font-black text-primary mb-1">0%</div>
+                <div class="text-gray-500 text-sm italic">نسبة الأخطاء</div>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="200">
+                <div class="text-3xl font-black text-primary mb-1">∞</div>
+                <div class="text-gray-500 text-sm italic">دقة مالية</div>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="300">
+                <div class="text-3xl font-black text-primary mb-1">24/7</div>
+                <div class="text-gray-500 text-sm italic">وصول سحابي</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-24 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-black text-primary mb-4">لماذا "إدارة بلس" هو الخيار الأول؟</h2>
+                <div class="w-20 h-1 bg-gold mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition group" data-aos="fade-up">
+                    <div class="w-16 h-16 bg-blue-50 text-primary rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-primary group-hover:text-white transition">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-black mb-3 text-gray-800">الوضوح المالي التام</h3>
+                    <p class="text-gray-600 leading-relaxed italic">
+                        تتبع إيراداتك، مصروفاتك، وصافي أرباحك الحقيقية بدقة متناهية. نظام ذكي يحسب النسب والمستحقات تلقائياً.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-blue-50 text-primary rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-primary group-hover:text-white transition">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3 class="text-xl font-black mb-3 text-gray-800">إدارة حجوزات ذكية</h3>
+                    <p class="text-gray-600 leading-relaxed italic">
+                        تقويم تفاعلي يربطك بفريقك. أسند المهام، حدد المواقع، وتابع حالة كل حجز (زواج، إعلان، تغطية) من هاتفك.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-blue-50 text-primary rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-primary group-hover:text-white transition">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3 class="text-xl font-black mb-3 text-gray-800">أتمتة الفواتير والواتساب</h3>
+                    <p class="text-gray-600 leading-relaxed italic">
+                        أصدر فواتير PDF احترافية وأرسلها لعملائك عبر الواتساب بضغطة زر واحدة مع تذكير آلي بالمستحقات.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gray-900 text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 opacity-10 transform translate-x-20 -translate-y-20">
+            <i class="fas fa-plus text-[300px]"></i>
+        </div>
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <h2 class="text-3xl md:text-5xl font-black mb-8 leading-tight italic" data-aos="zoom-in">
+                هل أنت مستعد لنقل وكالتك <br>إلى مستوى الاحتراف الحقيقي؟
+            </h2>
+            <div class="flex flex-col sm:flex-row justify-center gap-6" data-aos="fade-up">
+                <a href="https://wa.me/9665628488888?text=السلام%20عليكم%20أود%20التعرف%20أكثر%20على%20إدارة%20بلس" class="bg-gold hover:bg-yellow-600 px-12 py-5 rounded-2xl font-black text-xl transition shadow-2xl">
+                    اطلب النظام الآن <i class="fab fa-whatsapp mr-2"></i>
+                </a>
+            </div>
+            <p class="mt-8 text-gray-400 font-medium tracking-wide">
+                مطور بواسطة Codef | رخصة رقم FL-441060219
+            </p>
+        </div>
+    </section>
+
+    <footer class="py-12 bg-white border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex justify-center items-center gap-2 mb-6">
+                <div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-white text-lg">
+                    <i class="fas fa-plus"></i>
+                </div>
+                <span class="text-xl font-black text-primary tracking-tighter">إدارة بلس</span>
+            </div>
+            <p class="text-gray-500 text-sm">
+                جميع الحقوق محفوظة &copy; 2025 لـ <strong>Codef</strong>
+            </p>
+            <div class="mt-4 text-xs text-gray-400 font-mono tracking-widest uppercase">
+                Software & Web Development Solutions
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-back'
+        });
+    </script>
 </body>
 </html>
