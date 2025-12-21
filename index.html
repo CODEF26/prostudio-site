@@ -508,6 +508,20 @@
       transform: scale(1.05);
     }
 
+    /* ==================== FEATURE IMAGE STYLING ==================== */
+    .feature-image {
+      width: 100%;
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1);
+      transition: all 0.3s ease;
+      object-fit: cover;
+    }
+
+    .feature-image:hover {
+      transform: scale(1.02);
+      box-shadow: 0 15px 35px rgba(15, 23, 42, 0.15);
+    }
+
     /* ==================== FLOATING WHATSAPP BUTTON ==================== */
     .floating-whatsapp {
       position: fixed;
@@ -651,11 +665,7 @@
           </a>
         </div>
         <div class="col-lg-6 hero-image">
-          <!-- هنا تضع صورة لوحة التحكم الرئيسية (Dashboard) -->
-          <div style="background: linear-gradient(135deg, var(--primary-light), var(--gold)); border-radius: 1.5rem; padding: 3rem; text-align: center; color: #fff; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);">
-            <i class="fas fa-image" style="font-size: 4rem; opacity: 0.5;"></i>
-            <p style="margin-top: 1rem; font-size: 1rem;">ضع صورة لوحة التحكم هنا</p>
-          </div>
+          <img src="images/hero-dashboard.png" alt="لوحة التحكم الرئيسية" class="feature-image">
         </div>
       </div>
     </div>
@@ -713,11 +723,7 @@
             </div>
             <h3>لوحة التحكم الذكية</h3>
             <p>ملخص مالي وتشغيلي فوري يمنحك السيطرة الكاملة. اتخاذ قرارات سريعة ومبنية على بيانات دقيقة (إجمالي الإيرادات، صافي الربح، المستحقات).</p>
-            <!-- هنا تضع صورة لوحة التحكم -->
-            <div style="background: linear-gradient(135deg, #e3f2ff, #f0f9ff); border-radius: 1rem; padding: 2rem; text-align: center; margin-top: 1.5rem; color: var(--primary);">
-              <i class="fas fa-image" style="font-size: 2.5rem; opacity: 0.5;"></i>
-              <p style="margin-top: 0.5rem; font-size: 0.9rem;">صورة لوحة التحكم</p>
-            </div>
+            <img src="images/stats-overview.png" alt="لوحة التحكم" class="feature-image">
           </div>
         </div>
 
@@ -728,11 +734,7 @@
             </div>
             <h3>إدارة الحجوزات والتقويم</h3>
             <p>تنظيم المواعيد والجدولة الاحترافية. استخدام تقويم متكامل لتجنب تداخل المواعيد وضمان التزام الفريق بمواعيد العملاء.</p>
-            <!-- هنا تضع صورة التقويم -->
-            <div style="background: linear-gradient(135deg, #e3f2ff, #f0f9ff); border-radius: 1rem; padding: 2rem; text-align: center; margin-top: 1.5rem; color: var(--primary);">
-              <i class="fas fa-image" style="font-size: 2.5rem; opacity: 0.5;"></i>
-              <p style="margin-top: 0.5rem; font-size: 0.9rem;">صورة التقويم والحجوزات</p>
-            </div>
+            <img src="images/calendar-view.png" alt="التقويم والحجوزات" class="feature-image">
           </div>
         </div>
 
@@ -743,11 +745,7 @@
             </div>
             <h3>تتبع المهام والمشاريع</h3>
             <p>توزيع الأعمال ومتابعة الإنجاز. إسناد المهام للمصورين والمحررين وتتبع حالة كل مشروع من البداية حتى التسليم.</p>
-            <!-- هنا تضع صورة المهام -->
-            <div style="background: linear-gradient(135deg, #e3f2ff, #f0f9ff); border-radius: 1rem; padding: 2rem; text-align: center; margin-top: 1.5rem; color: var(--primary);">
-              <i class="fas fa-image" style="font-size: 2.5rem; opacity: 0.5;"></i>
-              <p style="margin-top: 0.5rem; font-size: 0.9rem;">صورة المهام والمشاريع</p>
-            </div>
+            <img src="images/tasks-management.png" alt="المهام والمشاريع" class="feature-image">
           </div>
         </div>
 
@@ -758,11 +756,7 @@
             </div>
             <h3>التحليل المالي والمصروفات</h3>
             <p>شفافية مالية غير مسبوقة. تتبع المصروفات بدقة، ومقارنة الأداء بالمستهدفات الشهرية، وحساب صافي الربح تلقائياً.</p>
-            <!-- هنا تضع صورة المالية -->
-            <div style="background: linear-gradient(135deg, #e3f2ff, #f0f9ff); border-radius: 1rem; padding: 2rem; text-align: center; margin-top: 1.5rem; color: var(--primary);">
-              <i class="fas fa-image" style="font-size: 2.5rem; opacity: 0.5;"></i>
-              <p style="margin-top: 0.5rem; font-size: 0.9rem;">صورة التحليل المالي</p>
-            </div>
+            <img src="images/finance-charts.png" alt="التحليل المالي" class="feature-image">
           </div>
         </div>
 
@@ -773,11 +767,7 @@
             </div>
             <h3>مزامنة التقويم الذكية</h3>
             <p>ترابط كامل مع تقويم Apple و Google Calendar. حافظ على جميع حجوزاتك متزامنة عبر جميع أجهزتك وتطبيقاتك بسهولة.</p>
-            <!-- هنا تضع صورة المزامنة -->
-            <div style="background: linear-gradient(135deg, #e3f2ff, #f0f9ff); border-radius: 1rem; padding: 2rem; text-align: center; margin-top: 1.5rem; color: var(--primary);">
-              <i class="fas fa-image" style="font-size: 2.5rem; opacity: 0.5;"></i>
-              <p style="margin-top: 0.5rem; font-size: 0.9rem;">صورة المزامنة</p>
-            </div>
+            <img src="images/sync-mockup.png" alt="مزامنة التقويم" class="feature-image">
           </div>
         </div>
 
@@ -788,11 +778,7 @@
             </div>
             <h3>صلاحيات مخصصة للفريق</h3>
             <p>تحكم دقيق في صلاحيات كل عضو بالفريق. حدد من يمكنه الوصول إلى الحجوزات والمشاريع والبيانات المالية حسب احتياجات عملك.</p>
-            <!-- هنا تضع صورة الصلاحيات -->
-            <div style="background: linear-gradient(135deg, #e3f2ff, #f0f9ff); border-radius: 1rem; padding: 2rem; text-align: center; margin-top: 1.5rem; color: var(--primary);">
-              <i class="fas fa-image" style="font-size: 2.5rem; opacity: 0.5;"></i>
-              <p style="margin-top: 0.5rem; font-size: 0.9rem;">صورة الصلاحيات</p>
-            </div>
+            <img src="images/permissions-settings.png" alt="صلاحيات الفريق" class="feature-image">
           </div>
         </div>
       </div>
